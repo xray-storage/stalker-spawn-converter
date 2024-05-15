@@ -42,10 +42,11 @@ namespace SpawnConverter.FStream
 
                 string dir = matches.Groups["dir"].Value;
                 string name = Path.Combine(dir, matches.Groups["name"].Value);
+                bool isCopRes = FilePath.DB.ROOT.Split('\\')[^1].CompareTo("resources") == 0;
 
                 dir = dir.CompareTo("spawns") == 0 ? "configs" : dir;
 
-                DBFile file = new(Path.Combine(FilePath.DB.ROOT, dir));
+                DBFile file = new(Path.Combine(FilePath.DB.ROOT, isCopRes ? string.Empty : dir));
                 var data = file.SearchFile(name);
 
                 if (data is null)

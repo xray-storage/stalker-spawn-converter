@@ -11,11 +11,12 @@ namespace SpawnConverter.Converters
         internal static async Task<bool> Run(string name)
         {
             bool result = false;
-            using SpawnManager spawn = new(name);
+            SpawnManager spawn = new(name);
 
             if (await spawn.ReadAsync())
             {
                 result = await spawn.WriteAsync();
+                spawn.Close();
             }
 
             return result;

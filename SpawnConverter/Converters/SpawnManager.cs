@@ -10,7 +10,7 @@ namespace SpawnConverter.Converters
         public const uint COP_VERSION = 10;
         private readonly Spawn data = new();
 
-        public SpawnManager(string level_name) => data.LevelName = level_name;
+        internal SpawnManager(string name) => data.LevelName = name;
 
         internal async Task<bool> ReadAsync() => await Task.Run(() => Read());
         internal async Task<bool> WriteAsync() => await Task.Run(() => Write());

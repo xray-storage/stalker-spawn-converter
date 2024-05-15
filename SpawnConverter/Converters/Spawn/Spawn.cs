@@ -1,5 +1,4 @@
-﻿using System.Numerics;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using SpawnConverter.Logs;
 using SpawnConverter.FStream;
 
@@ -16,7 +15,7 @@ namespace SpawnConverter.Converters.Spawns
         public bool SetData(XrFileReader reader)
         {
             uint size;
-            
+
             if ((size = reader.FindChunkSafe(CHUNK._GRAPH)) == 0)
             {
                 LogError(CODES.NOT_CHUNK);
@@ -38,13 +37,14 @@ namespace SpawnConverter.Converters.Spawns
                 DataLevels level = new()
                 {
                     Name = reader.ReadStringZ(),
-                    ID = (byte)(i + 1),
                 };
 
                 Levels.Add(level);
 
                 _ = reader.ReadVector();
-                _ = reader.ReadByte();
+
+                level.ID = reader.ReadByte();
+
                 _ = reader.ReadStringZ();
                 _ = reader.ReadGuid();
             }
@@ -62,19 +62,19 @@ namespace SpawnConverter.Converters.Spawns
                 _ = reader.ReadVector();
 
                 byte lvlid = reader.ReadByte();
-                
+
                 _ = reader.ReadUInt24();
-                
+
                 graph.VertexType = reader.ReadVectorVertex();
                 uint edge_offset = reader.ReadUInt32();
-                
+
                 _ = reader.ReadUInt32();
-                
+
                 byte edge_count = reader.ReadByte();
-                
+
                 _ = reader.ReadByte();
 
-                if(edge_count > 0)
+                if (edge_count > 0)
                 {
                     long safe_pos = reader.Position;
                     graph.Edges = new Edge[edge_count];
@@ -97,10 +97,7 @@ namespace SpawnConverter.Converters.Spawns
                 int id = Levels.FindIndex(x => x.ID == lvlid);
                 Levels[id].GameGraphs.Add(graph);
             }
-
             SetGameGraphRange();
-            
-            bool result = false;
 
             if ((size = reader.FindChunkSafe(CHUNK._ALIFE)) == 0)
             {
@@ -109,7 +106,11 @@ namespace SpawnConverter.Converters.Spawns
             }
 
             Log($"Read ALIFE: {size} bytes");
-            result = Sections.SetData(reader);
+            
+            if(!Sections.SetData(reader))
+            {
+                return false;
+            }
 
             if ((size = reader.FindChunkSafe(CHUNK._WAY)) == 0)
             {
@@ -118,9 +119,8 @@ namespace SpawnConverter.Converters.Spawns
             }
 
             Log($"Read WAY: {size} bytes");
-            result = Ways.SetData(reader);
-
-            return result;
+            
+            return Ways.SetData(reader);
         }
 
         private void SetGameGraphRange()

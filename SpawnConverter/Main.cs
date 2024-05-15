@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using SpawnConverter.Logs;
 using SpawnConverter.FStream;
 using SpawnConverter.Converters;
+using SpawnConverter.Levels;
 
 namespace SpawnConverter
 {
@@ -49,16 +50,11 @@ namespace SpawnConverter
         }
         private void FillListComboBox()
         {
-            LTXReader reader = new(FilePath.FILE.GAME_LEVEL);
+            using LevelCollection level = new();
 
-            foreach (var section in reader.GetKeys())
+            foreach (var name in level.Levels)
             {
-                if (section.CompareTo("levels") == 0)
-                {
-                    continue;
-                }
-
-                LevelComboBox.Items.Add(reader.ReadString(section, "name"));
+                LevelComboBox.Items.Add(name);
             }
 
             LevelComboBox.SelectedIndex = 0;

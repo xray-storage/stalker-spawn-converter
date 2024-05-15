@@ -19,12 +19,12 @@ namespace SpawnConverter.FStream
             result |= Directory.Exists(root) ? RESULT.GAME_ROOT : RESULT.NO;
             result |= File.Exists(fsgame) ? RESULT.GAME_FSGAME : RESULT.NO;
 
-            if (result == (RESULT.GAME_ROOT | RESULT.GAME_FSGAME))
+            if(result == (RESULT.GAME_ROOT | RESULT.GAME_FSGAME))
             {
                 GAME.ROOT = root;
                 SetPathes(fsgame);
 
-                result |= Directory.Exists(GAME.GAMEDATA) ? RESULT.GAME_GAMEDATA : RESULT.NO;
+                DB.CONFIGS = string.IsNullOrEmpty(DB.CONFIGS) ? DB.ROOT : DB.CONFIGS;
             }
 
             return result;
@@ -104,8 +104,8 @@ namespace SpawnConverter.FStream
 
                         KEYS.DB         => DB.ROOT       = CreatePath(path, value, isSDK),
                         KEYS.DBCONFIGS  => DB.CONFIGS    = CreatePath(path, value, isSDK),
-                        KEYS.DBMAPS     => DB.LEVELS     = CreatePath(path, value, isSDK),
-
+                        KEYS.DBCOP      => DB.ROOT       = string.IsNullOrEmpty(DB.ROOT) ?  
+                                                            CreatePath(path, value, isSDK) : DB.ROOT,
                         _               => null
                     };
                 }
@@ -136,11 +136,6 @@ namespace SpawnConverter.FStream
                 if((result & RESULT.GAME_FSGAME) != RESULT.GAME_FSGAME)
                 {
                     message += MESSAGE.GAME_FS + '\n';
-                }
-
-                if((result & RESULT.GAME_GAMEDATA) != RESULT.GAME_GAMEDATA)
-                {
-                    message += MESSAGE.GAME_GAMEDATA + '\n';
                 }
             }
 
