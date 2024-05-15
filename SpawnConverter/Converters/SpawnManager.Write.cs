@@ -20,11 +20,44 @@ namespace SpawnConverter.Converters
             SECTION = 1,
         }
 
+        private bool WriteAll(bool all = false)
+        {
+            bool result = true;
+
+            if(!all)
+            {
+                CheckLevel.LevelName = data.LevelName;
+
+                int ind = data.Levels.FindIndex(x => x.Name.CompareTo(data.LevelName) == 0);
+
+                CheckLevel.GameGraphStart = data.Levels[ind].GameGraphs[0].GameVertexID;
+                CheckLevel.GameGraphCount = (ushort)data.Levels[ind].GameGraphs.Count;
+
+                return Write();
+            }
+
+            foreach(var lvl in data.Levels)
+            {
+                CheckLevel.LevelName = lvl.Name;
+                CheckLevel.GameGraphStart = lvl.GameGraphs[0].GameVertexID;
+                CheckLevel.GameGraphCount = (ushort)lvl.GameGraphs.Count;
+
+                Log();
+                Log($"Target: {lvl.Name}");
+
+                if(!Write())
+                {
+                    result = false;
+                    break;
+                }
+            }
+
+            return result;
+        }
+
         private bool Write()
         {
-            Log();
-
-            string fdir = Path.Combine(SDK.LEVELS, data.LevelName);
+            string fdir = Path.Combine(SDK.LEVELS, CheckLevel.LevelName);
 
             if(!Directory.Exists(fdir))
             {
@@ -58,9 +91,6 @@ namespace SpawnConverter.Converters
             writer.Write(sb.ToString(), true);
             writer.Close();
             sb.Clear();
-
-            Log();
-            Log("Complete.");
 
             return true;
         }
@@ -105,6 +135,11 @@ namespace SpawnConverter.Converters
                         continue;
                     }
 
+                    if(!CheckLevel.IsOnLevel(sec.Game_Vertex_ID))
+                    {
+                        continue;
+                    }
+
                     FillSection(sec, ref sb, count);
 
                     count++;
@@ -113,7 +148,7 @@ namespace SpawnConverter.Converters
         }
         private void FillGameGraph(ref StringBuilder sb, ref int count)
         {
-            int ind = data.Levels.FindIndex(x => x.Name == data.LevelName);
+            int ind = data.Levels.FindIndex(x => x.Name == CheckLevel.LevelName);
             var lvls = data.Levels;
             var graphs = lvls[ind].GameGraphs;
 
@@ -124,6 +159,11 @@ namespace SpawnConverter.Converters
 
             foreach (var gg in graphs)
             {
+                if(!CheckLevel.IsOnLevel(gg.GameVertexID))
+                {
+                    continue;
+                }
+
                 sb.AppendLine();
                 sb.AppendLine($"[object_{count}]");
                 sb.AppendLine(StringFormat.Pairs("clsid", "6"));
@@ -623,8 +663,6 @@ namespace SpawnConverter.Converters
 
             for (byte i = 0; i < count; i++)
             {
-
-
                 sb.AppendLine(StringFormat.Pairs($"0000{++ind}", shapes[i].Type.ToString()));
                 type.AppendLine(StringFormat.Pairs($"shape_type_{i}", shapes[i].Type.ToString()));
 
@@ -675,6 +713,11 @@ namespace SpawnConverter.Converters
             {
                 foreach (var w in way)
                 {
+                    if(!CheckLevel.IsOnLevel(w.Points[0].GameVertexID))
+                    {
+                        continue;
+                    }
+
                     sb.AppendLine();
                     sb.AppendLine($"[object_{count}]");
                     sb.AppendLine(StringFormat.Pairs("clsid", "7"));

@@ -68,6 +68,7 @@ namespace SpawnConverter.Converters.Spawns.Clsid
                 "E_STLK"    => new Outfit(reader),              // outfit
                 "E_HLMET"   => new Outfit(reader),              // helmet
                 "DET_SIMP"  => new Item(reader),                // detector
+                "DET_ADVA"  => new Item(reader),                // detector
                 "DET_ELIT"  => new Item(reader),                // detector
                 "S_PDA"     => new PDA(reader),                 // pda
                 "D_PDA"     => new PDA(reader),                 // pda

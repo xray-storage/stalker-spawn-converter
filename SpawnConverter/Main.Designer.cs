@@ -32,6 +32,7 @@ namespace SpawnConverter
             this.LevelLabel = new System.Windows.Forms.Label();
             this.LevelComboBox = new System.Windows.Forms.ComboBox();
             this.GoButton = new System.Windows.Forms.Button();
+            this.LevelAllCheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // LevelLabel
@@ -63,17 +64,30 @@ namespace SpawnConverter
             this.GoButton.Location = new System.Drawing.Point(13, 63);
             this.GoButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.GoButton.Name = "GoButton";
-            this.GoButton.Size = new System.Drawing.Size(337, 27);
+            this.GoButton.Size = new System.Drawing.Size(371, 27);
             this.GoButton.TabIndex = 4;
             this.GoButton.Text = "Go!";
             this.GoButton.UseVisualStyleBackColor = true;
             this.GoButton.Click += new System.EventHandler(this.GoButton_Click);
             // 
+            // LevelAllCheckBox
+            // 
+            this.LevelAllCheckBox.Enabled = false;
+            this.LevelAllCheckBox.Location = new System.Drawing.Point(335, 15);
+            this.LevelAllCheckBox.Name = "LevelAllCheckBox";
+            this.LevelAllCheckBox.Size = new System.Drawing.Size(48, 27);
+            this.LevelAllCheckBox.TabIndex = 5;
+            this.LevelAllCheckBox.TabStop = false;
+            this.LevelAllCheckBox.Text = "All";
+            this.LevelAllCheckBox.UseVisualStyleBackColor = true;
+            this.LevelAllCheckBox.CheckedChanged += new System.EventHandler(this.LevelAllCheckBox_CheckedChanged);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(363, 109);
+            this.ClientSize = new System.Drawing.Size(397, 109);
+            this.Controls.Add(this.LevelAllCheckBox);
             this.Controls.Add(this.GoButton);
             this.Controls.Add(this.LevelComboBox);
             this.Controls.Add(this.LevelLabel);
@@ -95,6 +109,7 @@ namespace SpawnConverter
         private System.Windows.Forms.Label LevelLabel;
         private System.Windows.Forms.ComboBox LevelComboBox;
         private System.Windows.Forms.Button GoButton;
+        private System.Windows.Forms.CheckBox LevelAllCheckBox;
     }
 }
 

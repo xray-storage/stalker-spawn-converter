@@ -2,6 +2,7 @@
 {
     public static class CheckLevel
     {
+        public static string LevelName { get; set; }
         public static ushort GameGraphStart { get; set; }
         public static ushort GameGraphCount { get; set; }
 

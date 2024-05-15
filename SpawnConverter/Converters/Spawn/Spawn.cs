@@ -97,7 +97,6 @@ namespace SpawnConverter.Converters.Spawns
                 int id = Levels.FindIndex(x => x.ID == lvlid);
                 Levels[id].GameGraphs.Add(graph);
             }
-            SetGameGraphRange();
 
             if ((size = reader.FindChunkSafe(CHUNK._ALIFE)) == 0)
             {
@@ -121,14 +120,6 @@ namespace SpawnConverter.Converters.Spawns
             Log($"Read WAY: {size} bytes");
             
             return Ways.SetData(reader);
-        }
-
-        private void SetGameGraphRange()
-        {
-            var lvl = Levels.Find(x => x.Name == LevelName);
-
-            CheckLevel.GameGraphStart = lvl.GameGraphs[0].GameVertexID;
-            CheckLevel.GameGraphCount = (ushort)lvl.GameGraphs.Count;
         }
     }
 }

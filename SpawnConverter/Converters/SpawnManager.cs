@@ -13,6 +13,6 @@ namespace SpawnConverter.Converters
         internal SpawnManager(string name) => data.LevelName = name;
 
         internal async Task<bool> ReadAsync() => await Task.Run(() => Read());
-        internal async Task<bool> WriteAsync() => await Task.Run(() => Write());
+        internal async Task<bool> WriteAsync(bool all = false) => await Task.Run(() => WriteAll(all));
     }
 }

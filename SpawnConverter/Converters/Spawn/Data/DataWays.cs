@@ -21,7 +21,6 @@ namespace SpawnConverter.Converters.Spawns
             }
 
             uint count = reader.ReadUInt32();
-            Log($"* Found all patrol ways: {count}");
 
             if (reader.FindChunk(CHUNK.WAY.WAYS) == 0)
             {
@@ -31,44 +30,16 @@ namespace SpawnConverter.Converters.Spawns
 
             for (uint i = 0; i < count; i++)
             {
-                uint size;
-
-                if ((size = reader.FindChunk(i)) == 0)
+                if (reader.FindChunk(i) == 0)
                 {
                     LogError(CODES.NOT_CHUNK);
                     return false;
-                }
-
-                long reset_pos = reader.Position;
-
-                if (reader.FindChunk(CHUNK.WAY.POINT) == 0 || reader.FindChunk(CHUNK.WAY.PNT_LIST) == 0)
-                {
-                    LogError(CODES.NOT_CHUNK);
-                    return false;
-                }
-
-                if (reader.FindChunk(0) == 0 || reader.FindChunk(CHUNK.WAY.PNT_PARAM) == 0)
-                {
-                    LogError(CODES.NOT_CHUNK);
-                    return false;
-                }
-
-                _ = reader.ReadStringZ();
-                reader.Position += 20;
-
-                ushort gvid = reader.ReadUInt16();
-                reader.Position = reset_pos;
-
-                if (!CheckLevel.IsOnLevel(gvid))
-                {
-                    reader.Position += size;
-                    continue;
                 }
 
                 result = AddWayData(reader);
             }
 
-            Log($"* Found patrol ways for target: {Ways.Count}");
+            Log($"* Found patrol ways: {Ways.Count}");
 
             return result;
         }
@@ -121,7 +92,7 @@ namespace SpawnConverter.Converters.Spawns
                 way.Points[i].Position = reader.ReadVector();
                 way.Points[i].Flag = reader.ReadUInt32();
                 _ = reader.ReadUInt32();
-                _ = reader.ReadUInt16();
+                way.Points[i].GameVertexID = reader.ReadUInt16();
             }
 
             if (reader.FindChunk(CHUNK.WAY.PNT_LINKS) > 0)
@@ -160,6 +131,7 @@ namespace SpawnConverter.Converters.Spawns
         public string Name { get; set; }
         public Vector3 Position { get; set; }
         public uint Flag { get; set; }
+        public ushort GameVertexID { get; set; }
         public Link[] Links { get; set; }
     }
     public struct Link

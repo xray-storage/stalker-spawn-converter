@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace SpawnConverter.Converters
 {
@@ -11,12 +7,13 @@ namespace SpawnConverter.Converters
         internal static async Task<bool> Run(string name)
         {
             bool result = false;
-            SpawnManager spawn = new(name);
+            bool all = string.IsNullOrEmpty(name);
+
+            using SpawnManager spawn = new(name);
 
             if (await spawn.ReadAsync())
             {
-                result = await spawn.WriteAsync();
-                spawn.Close();
+                result = await spawn.WriteAsync(all);
             }
 
             return result;

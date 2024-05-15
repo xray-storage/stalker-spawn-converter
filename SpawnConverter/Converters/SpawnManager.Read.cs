@@ -11,7 +11,10 @@ namespace SpawnConverter.Converters
         private bool Read()
         {
             Log();
-            Log($"Target Level: {data.LevelName}");
+
+            string txt = string.IsNullOrEmpty(data.LevelName) ? "all" : data.LevelName;
+            Log($"Target Level: {txt}");
+            
             Log();
 
             bool result = false;

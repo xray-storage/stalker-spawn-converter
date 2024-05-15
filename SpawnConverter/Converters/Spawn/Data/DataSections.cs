@@ -21,7 +21,6 @@ namespace SpawnConverter.Converters.Spawns
             }
 
             uint count = reader.ReadUInt32();
-            Log($"* Found all section: {count}");
 
             if (reader.FindChunk(CHUNK.ALIFE.SEC_LIST) == 0)
             {
@@ -31,9 +30,7 @@ namespace SpawnConverter.Converters.Spawns
 
             for (uint i = 0; i < count; i++)
             {
-                uint size;
-
-                if ((size = reader.FindChunk(i)) == 0)
+                if (reader.FindChunk(i) == 0)
                 {
                     LogError(CODES.NOT_CHUNK);
                     return false;
@@ -51,17 +48,7 @@ namespace SpawnConverter.Converters.Spawns
                 string section = reader.ReadStringZ();
                 
                 _ = reader.ReadStringZ();
-
-                reader.Position += 48;
-                ushort gvid = reader.ReadUInt16();
-
                 reader.Position = reset_positon;
-
-                if(!CheckLevel.IsOnLevel(gvid))
-                {
-                    reader.Position += size;
-                    continue;
-                }
 
                 string clsid = GetClsID(section);
 
@@ -84,7 +71,7 @@ namespace SpawnConverter.Converters.Spawns
 
             _ = reader.FindChunk(CHUNK.ALIFE.UNK_EMPTY);
 
-            Log($"* Found sections for target: {Sections.Count}");
+            Log($"* Found sections: {Sections.Count}");
 
             return true;
         }

@@ -10,6 +10,8 @@ namespace SpawnConverter
 {
     public partial class Main : Form
     {
+        private int save_selected = 0;
+
         public Main()
         {
             InitializeComponent();
@@ -42,7 +44,7 @@ namespace SpawnConverter
             if(result != FilePath.RESULT.ALL_VALID)
             {
                 string message = FilePath.GetErrorsMessage(result);
-                Logger.SendError(null, new LogEventArgs(CODES.NOT_DIRECTORY, message, "ValidatePath", 45, "Main.cs"));
+                Logger.SendError(null, new LogEventArgs(CODES.NOT_DIRECTORY, message, "ValidatePath", 47, "Main.cs"));
                 return false;
             }
 
@@ -59,12 +61,14 @@ namespace SpawnConverter
 
             LevelComboBox.SelectedIndex = 0;
             LevelComboBox.Enabled = true;
-
+            LevelAllCheckBox.Enabled = true;
             GoButton.Enabled = true;
         }
         private async void StartConvert()
         {
-            bool result = await Converter.Run(LevelComboBox.SelectedItem.ToString());
+            string name = LevelAllCheckBox.Checked ? string.Empty : LevelComboBox.SelectedItem.ToString();
+            bool result = await Converter.Run(name);
+
             string message = result ? "Complete" : "Failed";
             _ = MessageBox.Show(message);
 
@@ -73,7 +77,8 @@ namespace SpawnConverter
         private void ControlsToggle()
         {
             GoButton.Enabled = !GoButton.Enabled;
-            LevelComboBox.Enabled = !LevelComboBox.Enabled;
+            LevelAllCheckBox.Enabled = !LevelAllCheckBox.Enabled;
+            LevelComboBox.Enabled = !LevelAllCheckBox.Checked && !LevelComboBox.Enabled;
         }
 
         #region Events
@@ -88,6 +93,13 @@ namespace SpawnConverter
             _ = MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             Close();
+        }
+        private void LevelAllCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            save_selected = LevelAllCheckBox.Checked ? LevelComboBox.SelectedIndex : save_selected;
+
+            LevelComboBox.Enabled = !LevelAllCheckBox.Checked;
+            LevelComboBox.SelectedIndex = LevelAllCheckBox.Checked ? -1 : save_selected;
         }
         #endregion
     }
