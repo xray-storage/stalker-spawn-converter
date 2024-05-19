@@ -8,10 +8,13 @@
     <Company></Company>
     <Copyright></Copyright>
     <ApplicationIcon></ApplicationIcon>
-    <Version>1.0.0</Version>
+    <Version>1.0.3</Version>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Update="ChangeLog.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="lzo1x_64.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
