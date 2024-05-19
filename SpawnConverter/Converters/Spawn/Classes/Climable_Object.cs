@@ -17,7 +17,7 @@ namespace SpawnConverter.Converters.Spawns.Classes
         public string Material { get; set; }
 
 
-        public Climable_Object(XrFileReader reader) : base(reader) => TypeName = GetType().Name;
+        public Climable_Object(XrFileReader reader) : base(reader) { }
 
 
         private protected override void ReadBasic(XrFileReader reader)

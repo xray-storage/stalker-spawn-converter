@@ -15,7 +15,6 @@ namespace SpawnConverter.Converters.Spawns.Templates
         }
 
         public ushort SectionID { get; set; }
-        public string TypeName { get; set; }
 
         public ushort Dummy16 { get; set; }
         public string Section_Name { get; set; }

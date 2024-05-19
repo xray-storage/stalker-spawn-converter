@@ -5,7 +5,6 @@ namespace SpawnConverter.Converters.Spawns.Interfaces
     public interface ISection
     {
         public ushort SectionID { get; set; }
-        public string TypeName { get; set; }
 
         // CSE_Abstract
         public ushort Dummy16 { get; set; }

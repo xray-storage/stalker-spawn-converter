@@ -14,7 +14,7 @@ namespace SpawnConverter.Converters.Spawns.Classes
         // CSE_Alife_Object_Breakable
         public float Health { get; set; }
 
-        public Breakable_Object(XrFileReader reader) : base(reader) => TypeName = GetType().Name;
+        public Breakable_Object(XrFileReader reader) : base(reader) { }
 
         private protected override void ReadBasic(XrFileReader reader)
         {

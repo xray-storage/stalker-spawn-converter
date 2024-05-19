@@ -19,7 +19,7 @@ namespace SpawnConverter.Converters.Spawns.Classes
         // CSE_ALife_Car
         public float Health { get; set; }
 
-        public M_Car(XrFileReader reader) : base(reader) => TypeName = GetType().Name;
+        public M_Car(XrFileReader reader) : base(reader) { }
 
         private protected override void ReadBasic(XrFileReader reader)
         {

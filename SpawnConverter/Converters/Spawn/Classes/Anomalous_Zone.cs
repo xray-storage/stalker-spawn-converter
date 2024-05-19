@@ -30,7 +30,7 @@ namespace SpawnConverter.Converters.Spawns.Classes
         // se_zones
         public byte? Last_Spawn_Time { get; set; }
 
-        public Anomalous_Zone(XrFileReader reader) : base(reader) => TypeName = GetType().Name;
+        public Anomalous_Zone(XrFileReader reader) : base(reader) { }
 
         private protected override void ReadBasic(XrFileReader reader)
         {

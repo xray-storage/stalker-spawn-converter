@@ -23,7 +23,7 @@ namespace SpawnConverter.Converters.Spawns.Classes
         public string HE_Startup_Animation { get; set; }
         public string HE_Engine_Sound { get; set; }
 
-        public Helicopter(XrFileReader reader) : base(reader) => TypeName = GetType().Name;
+        public Helicopter(XrFileReader reader) : base(reader) { }
 
         private protected override void ReadBasic(XrFileReader reader)
         {

@@ -22,7 +22,7 @@ namespace SpawnConverter.Converters.Spawns.Classes
         public byte? Respawn_Point { get; set; } = null;
         public uint? Smart_Alarm_Time { get; set; } = null;
 
-        public Smart_Terrain(XrFileReader reader) : base(reader) => TypeName = GetType().Name;
+        public Smart_Terrain(XrFileReader reader) : base(reader) { }
 
         private protected override void ReadBasic(XrFileReader reader)
         {

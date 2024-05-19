@@ -52,7 +52,7 @@ namespace SpawnConverter.Converters.Spawns.Classes
         // CSE_ALife_Item_Weapon_Magazined
         public byte UPD_Current_Fire_Mode { get; set; }
 
-        public Weapon_WGL(XrFileReader reader) : base(reader) => TypeName = GetType().Name;
+        public Weapon_WGL(XrFileReader reader) : base(reader) { }
 
         private protected override void ReadBasic(XrFileReader reader)
         {

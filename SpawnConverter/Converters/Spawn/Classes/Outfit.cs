@@ -32,7 +32,7 @@ namespace SpawnConverter.Converters.Spawns.Classes
         // CSE_ALife_Item_Custom_Outfit
         public byte UPD_Condition { get; set; }
 
-        public Outfit(XrFileReader reader) : base(reader) => TypeName = GetType().Name;
+        public Outfit(XrFileReader reader) : base(reader) { }
 
         private protected override void ReadBasic(XrFileReader reader)
         {

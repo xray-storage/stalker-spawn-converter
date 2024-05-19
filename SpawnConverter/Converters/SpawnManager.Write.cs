@@ -477,6 +477,13 @@ namespace SpawnConverter.Converters
                 basic.AppendLine(Pairs("000027", $"\"{obj.Visual}\""));
                 basic.AppendLine(Pairs("000028", obj.Visual_Flags.ToString()));
             }
+            else if(sec.GetType() == typeof(Script_Object))
+            {
+                Script_Object obj = sec as Script_Object;
+
+                basic.AppendLine(Pairs("000027", $"\"{obj.Visual}\""));
+                basic.AppendLine(Pairs("000028", obj.Visual_Flags.ToString()));
+            }
             else if (sec.GetType() == typeof(Space_Restrictor))
             {
                 Space_Restrictor obj = sec as Space_Restrictor;

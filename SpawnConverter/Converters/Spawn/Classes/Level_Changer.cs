@@ -32,7 +32,7 @@ namespace SpawnConverter.Converters.Spawns.Classes
         public byte? Invitation_Enable { get; set; }
         public byte? Save_Marker_End { get; set; }
 
-        public Level_Changer(XrFileReader reader) : base(reader) => TypeName = GetType().Name;
+        public Level_Changer(XrFileReader reader) : base(reader) { }
 
         private protected override void ReadBasic(XrFileReader reader)
         {

@@ -34,7 +34,7 @@ namespace SpawnConverter.Converters.Spawns.Classes
         public Vector3 UPD_State_Linear_Velocity { get; set; }
         public byte UPD_Freeze_Time { get; set; }
 
-        public Physic_Object(XrFileReader reader) : base(reader) => TypeName = GetType().Name;
+        public Physic_Object(XrFileReader reader) : base(reader) { }
 
         private protected override void ReadBasic(XrFileReader reader)
         {

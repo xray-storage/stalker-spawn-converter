@@ -16,7 +16,7 @@ namespace SpawnConverter.Converters.Spawns.Classes
         public byte Closed { get; set; }
         public string Tip_Text { get; set; }
 
-        public Inventory_Box(XrFileReader reader) : base(reader) => TypeName = GetType().Name;
+        public Inventory_Box(XrFileReader reader) : base(reader) { }
 
         private protected override void ReadBasic(XrFileReader reader)
         {

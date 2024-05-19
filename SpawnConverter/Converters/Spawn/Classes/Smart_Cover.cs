@@ -25,7 +25,7 @@ namespace SpawnConverter.Converters.Spawns.Classes
         public byte? Loophole_Count { get; set; } = null;
         public Loophole[] Loophole { get; set; } = null;
 
-        public Smart_Cover(XrFileReader reader) : base(reader) => TypeName = GetType().Name;
+        public Smart_Cover(XrFileReader reader) : base(reader) { }
 
         private protected override void ReadBasic(XrFileReader reader)
         {

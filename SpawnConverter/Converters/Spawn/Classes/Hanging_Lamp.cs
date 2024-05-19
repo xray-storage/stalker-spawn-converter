@@ -39,7 +39,7 @@ namespace SpawnConverter.Converters.Spawns.Classes
         public float Volumetric_Intensity { get; set; }
         public float Volumetric_Distance { get; set; }
 
-        public Hanging_Lamp(XrFileReader reader) : base(reader) => TypeName = GetType().Name;
+        public Hanging_Lamp(XrFileReader reader) : base(reader) { }
 
         private protected override void ReadBasic(XrFileReader reader)
         {

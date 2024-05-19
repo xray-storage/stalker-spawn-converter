@@ -37,7 +37,7 @@ namespace SpawnConverter.Converters.Spawns.Classes
         public ushort UPD_Elapsed { get; set; }
 
 
-        public Ammo(XrFileReader reader) : base(reader) => TypeName = GetType().Name;
+        public Ammo(XrFileReader reader) : base(reader) { }
 
 
         private protected override void ReadBasic(XrFileReader reader)

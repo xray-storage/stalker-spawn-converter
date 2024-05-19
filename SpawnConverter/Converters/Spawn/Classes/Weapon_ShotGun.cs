@@ -52,7 +52,7 @@ namespace SpawnConverter.Converters.Spawns.Classes
         // CSE_ALife_Item_Weapon_Auto_ShotGun
         public byte UPD_Ammo_Count { get; set; }
 
-        public Weapon_ShotGun(XrFileReader reader) : base(reader) => TypeName = GetType().Name;
+        public Weapon_ShotGun(XrFileReader reader) : base(reader) { }
 
         private protected override void ReadBasic(XrFileReader reader)
         {

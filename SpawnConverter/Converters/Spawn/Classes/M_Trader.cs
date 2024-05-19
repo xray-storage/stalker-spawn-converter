@@ -23,7 +23,7 @@ namespace SpawnConverter.Converters.Spawns.Classes
         public byte Deadbody_Can_Take { get; set; }
         public byte Deadbody_Closed { get; set; }
 
-        public M_Trader(XrFileReader reader) : base(reader) => TypeName = GetType().Name;
+        public M_Trader(XrFileReader reader) : base(reader) { }
 
         private protected override void ReadBasic(XrFileReader reader)
         {

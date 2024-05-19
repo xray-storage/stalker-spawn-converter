@@ -71,7 +71,7 @@ namespace SpawnConverter.Converters.Spawns.Classes
         public ushort UPD_Num_Items { get; set; }
 
 
-        public Actor(XrFileReader reader) : base(reader) => TypeName = GetType().Name;
+        public Actor(XrFileReader reader) : base(reader) { }
 
 
         private protected override void ReadBasic(XrFileReader reader)

@@ -15,7 +15,7 @@ namespace SpawnConverter.Converters.Spawns.Classes
         // CSE_ALife_Space_Restrictor
         public byte Spase_Restrictor_Type { get; set; }
 
-        public Space_Restrictor(XrFileReader reader) : base(reader) => TypeName = GetType().Name;
+        public Space_Restrictor(XrFileReader reader) : base(reader) { }
 
         private protected override void ReadBasic(XrFileReader reader)
         {

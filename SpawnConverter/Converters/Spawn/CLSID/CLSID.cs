@@ -29,6 +29,7 @@ namespace SpawnConverter.Converters.Spawns.Clsid
                 "SMRT_C_S"  => new Smart_Cover(reader),         // smart_cover
                 "SMRTTRRN"  => new Smart_Terrain(reader),       // smart_terrain
                 "O_SEARCH"  => new Search_Light(reader),        // search_light
+                "SCRPTOBJ"  => new Script_Object(reader),       // script_object
                 "Z_MBALD"   => new Anomalous_Zone(reader),      // anomalies_zones
                 "Z_TORRID"  => new Torrid_Zone(reader),         // anomalies_zones
                 "Z_RADIO"   => new Anomalous_Zone(reader),      // anomalies_zones
